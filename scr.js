@@ -31,7 +31,7 @@ async function fogging(cont, w, h)
 
 async function getText() 
 {
-    let json = await $.getJSON("https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?");
+    let json = await $.getJSON("https://api.forismatic.com/api/1.0/?method=getQuote&lang=ru&format=jsonp&jsonp=?");
     return json.quoteText;
 };
 
