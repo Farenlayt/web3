@@ -17,10 +17,16 @@ async function getPicture(collection)
     return await result.blob();
 };
 
-let drawImg = async function(x, y, pick, cont) 
+ async function drawImg (x, y, pick, cont) 
 {
     let	img = await createImageBitmap(pick);
     cont.drawImage(img, x, y);
+};
+
+async function fogging(cont, w, h)
+{
+	cont.fillStyle = "rgba(120, 120, 120, 0.4)";
+    cont.fillRect(0, 0, w, h);
 };
 
 let main = async function() 
@@ -34,7 +40,8 @@ let main = async function()
     pickBox.attr("width", w);
     pickBox.appendTo('div');
 	let cont = pickBox[0].getContext('2d');
-	drawImages(cont);
+	await drawImages(cont);
+	await fogging(cont, w, h);
 };
 
 $( document ).ready(main());
