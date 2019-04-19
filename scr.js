@@ -29,6 +29,18 @@ async function fogging(cont, w, h)
     cont.fillRect(0, 0, w, h);
 };
 
+async function getText() 
+{
+    let json = await $.getJSON("https://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?");
+    return json.quoteText;
+};
+
+async function writeText(cont)
+{
+	let txt = await getText();
+	cont.fillText(txt, 50, 600)
+}
+
 let main = async function() 
 {
 	let w = 700; 
@@ -42,6 +54,7 @@ let main = async function()
 	let cont = pickBox[0].getContext('2d');
 	await drawImages(cont);
 	await fogging(cont, w, h);
+	await writeText(cont)
 };
 
 $( document ).ready(main());
