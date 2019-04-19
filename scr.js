@@ -37,8 +37,29 @@ async function getText()
 
 async function writeText(cont)
 {
+	cont.fillStyle = "#FFF";
+    cont.font = "italic 30pt Arial";
 	let txt = await getText();
-	cont.fillText(txt, 50, 600)
+	let words = txt.split(" ");
+    let countWords = words.length;
+    let line = "";
+	let marginTop = 50;
+    for (let n = 0; n < countWords; n++) 
+	{
+        let testLine = line + words[n] + " ";
+        let testWidth = cont.measureText(testLine).width;
+        if (testWidth > 600) 
+		{
+            cont.fillText(line, 50, marginTop);
+            line = words[n] + " ";
+            marginTop += 70;
+        }
+        else 
+		{
+            line = testLine;
+        }
+    }
+    cont.fillText(line, 50, marginTop);
 }
 
 let main = async function() 
